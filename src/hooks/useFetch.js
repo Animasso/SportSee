@@ -4,9 +4,17 @@ import { useState, useEffect } from "react";
 function useFetchUrl(path) {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(path)
+    fetch(path, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
       .then((response) => response.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        console.log(data);
+        setData(data);
+      });
   }, [path]);
   return data;
 }
