@@ -1,14 +1,20 @@
 import "./App.css";
 import FakeLogin from "./Pages/FakeLogin";
-// import dataUser from "./mock_data/user_data.json";
-import useFetchUrl from "./hooks/useFetch";
-// import UserFetchApi from "./hooks/UserFetchApi";
+import { Routes, Route } from "react-router-dom";
+// import useFetchUrl from "./hooks/useFetch";
+import Home from "./Pages/Home";
+
 function App() {
-  const dataUsers = useFetchUrl("mock_data/user_data.json");
-  console.log("dataUsers:", dataUsers);
+  // const dataUsers = useFetchUrl("mock_data/user_data.json");
+
   return (
-    <div className="App">
-      <FakeLogin dataUsers={dataUsers} />
+    <div>
+      <Routes>
+        <Route path="/" element={<FakeLogin />} />
+        <Route />
+        <Route path="/user/:id" element={<Home />} />
+        <Route />
+      </Routes>
     </div>
   );
 }

@@ -1,13 +1,13 @@
 import React from "react";
-// import UserFetchApi from "../hooks/UserFetchApi";
-// import UserCard from "../components/UserCard";
-
+import useFetchUrl from "../hooks/useFetch";
+import UserCard from "../components/UserCard";
 function FakeLogin(props) {
-  //   const userInfos18 = UserFetchApi(18);
+  const dataUsers = useFetchUrl("mock_data/user_data.json");
+  console.log("dataUsers:", dataUsers);
+
   return (
     <div className="cards">
-      {/* <UserCard /> */}
-      {/* <UserCard user18={userInfos18} /> */}
+      <UserCard dataUsers={dataUsers} />
     </div>
   );
 }
