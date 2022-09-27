@@ -1,0 +1,14 @@
+.navbar {
+  width: 100%;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+}
+.simpleNav {
+  display: flex;
+  width: 100%;
+}
+li {
+  height: 24px;
+  width: 80px;
+}
