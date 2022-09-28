@@ -1,4 +1,4 @@
- {"USER_PERFORMANCE" : [
+ [
     {
       "userId": 12,
      " kind": {
@@ -73,4 +73,4 @@
         }
       ]
     }
-  ]}
+  ]

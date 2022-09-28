@@ -1,4 +1,4 @@
-{"USER_ACTIVITY" : [
+ [
     {
       "userId": 12,
       "sessions": [
@@ -79,4 +79,4 @@
         }
       ]
     }
-  ]}
+  ]

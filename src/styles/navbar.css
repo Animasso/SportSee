@@ -3,6 +3,12 @@
   color: white;
   display: flex;
   justify-content: space-around;
+  margin-top: 37px;
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+  list-style: none;
 }
 .simpleNav {
   display: flex;
@@ -11,4 +17,7 @@
 li {
   height: 24px;
   width: 80px;
+}
+.logo {
+  margin-top: 10px;
 }

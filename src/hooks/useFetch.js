@@ -14,6 +14,9 @@ function useFetchUrl(path) {
       .then((data) => {
         console.log(data);
         setData(data);
+      })
+      .catch((err) => {
+        console.log("Error Reading data " + err);
       });
   }, [path]);
   return data;

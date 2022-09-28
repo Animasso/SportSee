@@ -1,4 +1,4 @@
-{"USER_AVERAGE_SESSIONS": [
+ [
     {
       "userId": 12,
       "sessions": [
@@ -65,4 +65,4 @@
         }
       ]
     }
-  ]}
+  ]
