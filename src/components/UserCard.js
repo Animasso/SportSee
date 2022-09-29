@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import maleAvatar from "../assets/avatarHomme.jpg";
-// import femaleAvatar from "../assets/avatarFemme.jpg";
+import femaleAvatar from "../assets/avatarFemme.jpg";
 function UserCard(props) {
   const { dataUsers } = props;
   let navigate = useNavigate();
@@ -16,7 +16,11 @@ function UserCard(props) {
             }}
           >
             <div className="avatar">
-              <img src={maleAvatar} className="userAvatar" alt="" />
+              <img
+                src={user.id === 12 ? maleAvatar : femaleAvatar}
+                className="userAvatar"
+                alt=""
+              />
             </div>
             <div className="username-info">
               <p className="name">

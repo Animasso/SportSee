@@ -1,24 +1,20 @@
-import React from "react";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useState } from "react";
-function UserName(props) {
-  const { dataUsers } = props;
-  const params = useParams();
+import useFetchUrl from "../hooks/useFetch";
 
-  const [name, setName] = useState([]);
-  useEffect(() => {
-    const nameUser = dataUsers.find((user) => user.id === params.id);
-    setName(nameUser);
-  }, [name, params.id, dataUsers]);
+function UserName(props) {
+  //   const { dataUsers } = props;
+  const params = useParams();
+  const userDataInfo = useFetchUrl(`/mock_data/user/${params.id}/data.json`);
+  console.log("userDataInfo:", userDataInfo);
+
   return (
     <>
-      {/* <div className="user-name">
+      <div className="user-name">
         <h1>Bonjour</h1>
-        <div className="firstLast-name">
-          {nameUser.userInfos.firstName} {nameUser.userInfos.lastName}
+        <div className="firstname">
+          {console.log(userDataInfo.userInfos.firstName)}
         </div>
-      </div> */}
+      </div>
     </>
   );
 }
