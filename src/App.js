@@ -5,13 +5,13 @@ import { Routes, Route } from "react-router-dom";
 import useFetchUrl from "./hooks/useFetch";
 import Home from "./Pages/Home";
 
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 //import le fetch ici avec le data user et le faire passer en tant que props dans les elelment
 function App() {
   const dataUsers = useFetchUrl("mock_data/user_data.json");
   console.log("dataUsers:", dataUsers);
-  const params = useParams();
+  // const params = useParams();
 
   return (
     <div>

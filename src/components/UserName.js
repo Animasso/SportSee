@@ -11,7 +11,8 @@ function UserName(props) {
     <>
       <div className="username">
         <h1>Bonjour</h1>
-        <div className="firstname">{userDataInfo.userInfos.firstName}</div>
+        <pre>{JSON.stringify(userDataInfo)}</pre>
+        <div className="firstname">{userDataInfo?.userInfos?.firstName}</div>
       </div>
     </>
   );
