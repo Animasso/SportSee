@@ -21,7 +21,7 @@ function SessionTimeChart(props) {
   );
   console.log("sessionsAverage:", sessionsAverage);
 
-  return <div></div>;
+  return <div className="session-time-chart"></div>;
 }
 
 export default SessionTimeChart;
