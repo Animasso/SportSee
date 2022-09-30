@@ -9,11 +9,9 @@ function UserName(props) {
 
   return (
     <>
-      <div className="user-name">
+      <div className="username">
         <h1>Bonjour</h1>
-        <div className="firstname">
-          {console.log(userDataInfo.userInfos.firstName)}
-        </div>
+        <div className="firstname">{userDataInfo.userInfos.firstName}</div>
       </div>
     </>
   );

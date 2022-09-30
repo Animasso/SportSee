@@ -15,12 +15,12 @@ function Home(props) {
   // const params = useParams();
   // const userData = dataUsers.find((user) => user.id === params.id);
   // console.log("userData:", userData);
-  const { dataUserInfo } = props;
+
   return (
     <>
       <NavBar />
       <SideBar />
-      <UserName dataUserInfo={dataUserInfo} />
+      <UserName />
       <SessionTimeChart />
       <RadarPerformance />
       <BarChartActivity />
