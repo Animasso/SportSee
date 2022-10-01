@@ -4,3 +4,12 @@
 @import "./username.css";
 @import "./sessionTimeChart.css";
 @import "./home.css";
+@import "./barchart.css";
+
+.cardChart {
+  width: 835px;
+  height: 270px;
+  background-color: aquamarine;
+  top: 101%;
+  left: 17%;
+}

@@ -9,7 +9,7 @@ function BarChartActivity(props) {
     `/mock_data/user/${params.id}/activity.json`
   );
   console.log("userPerformance:", userActivity);
-  return <div></div>;
+  return <div className="barChart-activity"></div>;
 }
 
 export default BarChartActivity;

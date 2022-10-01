@@ -28,16 +28,52 @@ function UserName(props) {
             <div className="icon">
               <img src={iconCalories} alt="" />
               <div className="exp">
-                <div className="numberExp">
-                  {userDataInfo?.keyData?.calorieCount}
+                <div className="substrats-number">
+                  {userDataInfo?.keyData?.calorieCount}kCal
                 </div>
-                <div className="calories">Calories</div>
+                <div className="substrats">Calories</div>
               </div>
             </div>
           </div>
-          <div className="infos"></div>
-          <div className="infos"></div>
-          <div className="infos"></div>
+          <div className="infos">
+            <div className="infos">
+              <div className="icon">
+                <img src={iconProtein} alt="" />
+                <div className="exp">
+                  <div className="substrats-number">
+                    {userDataInfo?.keyData?.proteinCount}g
+                  </div>
+                  <div className="substrats">Proteines</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="infos">
+            <div className="infos">
+              <div className="icon">
+                <img src={iconCarbs} alt="" />
+                <div className="exp">
+                  <div className="substrats-number">
+                    {userDataInfo?.keyData?.carbohydrateCount}g
+                  </div>
+                  <div className="substrats">Glucides</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="infos">
+            <div className="infos">
+              <div className="icon">
+                <img src={iconFat} alt="" />
+                <div className="exp">
+                  <div className="substrats-number">
+                    {userDataInfo?.keyData?.lipidCount}g
+                  </div>
+                  <div className="substrats">Lipides</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

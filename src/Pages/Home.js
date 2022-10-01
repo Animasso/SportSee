@@ -21,9 +21,11 @@ function Home(props) {
       <NavBar />
       <SideBar />
       <UserName />
-      <SessionTimeChart />
-      <RadarPerformance />
       <BarChartActivity />
+      <div className="cardChart">
+        <SessionTimeChart />
+        <RadarPerformance />
+      </div>
     </>
   );
 }

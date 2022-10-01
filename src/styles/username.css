@@ -36,7 +36,7 @@ h1 {
   height: 124px;
   width: 258px;
   border-radius: 5px;
-  background-color: rgb(202, 202, 124);
+  background-color: #fbfbfb;
 }
 .icon {
   widows: 100%;
@@ -51,4 +51,17 @@ h1 {
   left: 32px;
   top: 32px;
   border-radius: 6px;
+}
+.substrats-number {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+.substrats {
+  color: #74798c;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
 }
