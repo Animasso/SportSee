@@ -7,6 +7,9 @@
 @import "./barchart.css";
 
 .cardChart {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
   width: 835px;
   height: 270px;
   background-color: aquamarine;

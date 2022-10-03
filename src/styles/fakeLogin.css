@@ -26,17 +26,16 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
-
-  -webkit-box-shadow: #fff 0 -1px 4px, rgb(143, 202, 201) 0 -2px 10px,
-    #008cff 0 -10px 20px, rgb(4, 0, 255) 0 -18px 40px,
-    5px 5px 15px 5px rgba(0, 0, 0, 0);
-  box-shadow: #fff 0 -1px 4px, rgb(143, 202, 201) 0 -2px 10px,
-    #008cff 0 -10px 20px, rgb(4, 0, 255) 0 -18px 40px,
-    5px 5px 15px 5px rgba(0, 0, 0, 0);
+  border: 1px solid grey;
+  -webkit-box-shadow: 5px 5px 0px 0px #289fed, 10px 10px 0px 0px #5fb8ff,
+    15px 15px 0px 0px #a1d8ff, 20px 20px 0px 0px #cae6ff,
+    25px 25px 0px 0px #e1eeff, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: 5px 5px 0px 0px #289fed, 10px 10px 0px 0px #5fb8ff,
+    15px 15px 0px 0px #a1d8ff, 20px 20px 0px 0px #cae6ff,
+    25px 25px 0px 0px #e1eeff, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 .avatar {
   height: 200px;
-  border: 1px solid;
 }
 .avatar img {
   width: 100%;
