@@ -16,31 +16,47 @@ function RadarPerformance(props) {
   const userPerformance = useFetchUrl(
     `/mock_data/user/${params.id}/performance.json`
   );
-  console.log("userPerformanceData:", userPerformance?.data);
+  console.log("userPerformanceData:", userPerformance);
+  const userData = userPerformance?.data;
+  console.log("userData:", userData);
+  const performance = userData?.map((data) => ({
+    ...data,
+    kind: userPerformance?.kind[data.kind],
+  }));
+  console.log("performance:", performance);
+  const kind = userPerformance?.kind;
+  console.log("kind:", kind);
+
+  const kindUpper = [];
+  for (const property in kind) {
+    kindUpper.push(kind[property]);
+  }
+  function capitalizeWords(arr) {
+    return arr.map((element) => {
+      return element.charAt(0).toUpperCase() + element.slice(1).toLowerCase();
+    });
+  }
+  const kindCap = capitalizeWords(kindUpper);
+  console.log("kindCap:", kindCap);
   return (
-    <div className="sessionTime-activity">
+    <div className="sessionTime-performance">
       {
-        // <ResponsiveContainer width="100%" height="100%">
-        //   {
-        //     <RadarChart
-        //       cx="50%"
-        //       cy="50%"
-        //       outerRadius="80%"
-        //       data={userPerformance}
-        //     >
-        //       <PolarGrid />
-        //       <PolarAngleAxis dataKey={userPerformance?.kind} />
-        //       <PolarRadiusAxis />
-        //       <Radar
-        //         name="performanceUser"
-        //         dataKey={userPerformance?.data}
-        //         stroke="#8884d8"
-        //         fill="#8884d8"
-        //         fillOpacity={0.6}
-        //       />
-        //     </RadarChart>
-        //   }
-        // </ResponsiveContainer>
+        <ResponsiveContainer width="100%" height="100%">
+          {
+            <RadarChart cx="50%" cy="50%" outerRadius="80%" data={performance}>
+              <PolarGrid />
+              <PolarAngleAxis dataKey="kind" stroke="#FFFFFF" />
+              <PolarRadiusAxis label={false} />
+              <Radar
+                name="performanceUser"
+                dataKey="value"
+                stroke="red"
+                fill="red"
+                fillOpacity={0.6}
+              />
+            </RadarChart>
+          }
+        </ResponsiveContainer>
       }
     </div>
   );

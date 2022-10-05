@@ -5,14 +5,5 @@
 @import "./sessionTimeChart.css";
 @import "./home.css";
 @import "./barchart.css";
-
-.cardChart {
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  width: 835px;
-  height: 270px;
-  background-color: aquamarine;
-  top: 101%;
-  left: 17%;
-}
+@import "./radarChart.css";
+@import "./pieChart.css";

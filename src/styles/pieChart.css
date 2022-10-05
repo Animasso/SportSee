@@ -1,0 +1,10 @@
+.pie-activity {
+  height: 263px;
+  width: 258px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  background-color: rgb(212, 177, 177);
+}

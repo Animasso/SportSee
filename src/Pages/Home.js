@@ -8,6 +8,7 @@ import SessionTimeChart from "../components/SessionTImeChart";
 import UserName from "../components/UserName";
 import RadarPerformance from "../components/RadarPerformance";
 import BarChartActivity from "../components/BarChartActivity";
+import PieChartActivity from "../components/PieChartActivity";
 // import { useParams } from "react-router-dom";
 
 function Home(props) {
@@ -25,6 +26,7 @@ function Home(props) {
       <div className="cardChart">
         <SessionTimeChart />
         <RadarPerformance />
+        <PieChartActivity />
       </div>
     </>
   );

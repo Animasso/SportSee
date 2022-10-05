@@ -17,22 +17,22 @@ function BarChartActivity(props) {
   const userActivity = useFetchUrl(
     `/mock_data/user/${params.id}/activity.json`
   );
-  console.log("userActivity:", userActivity);
+  // console.log("userActivity:", userActivity);
   const actSession = userActivity?.sessions;
-  console.log("actSession:", actSession);
+  // console.log("actSession:", actSession);
   const days = actSession?.map((days) => days?.day);
   const kilo = actSession?.map((kilos) => kilos?.kilogram);
   const calories = actSession?.map((calorie) => calorie?.calories);
-  console.log("calories:", calories);
+  // console.log("calories:", calories);
 
-  console.log("kilo:", kilo);
-  console.log("days:", days);
+  // console.log("kilo:", kilo);
+  // console.log("days:", days);
   const daysToNumber = [];
   for (let i = 0; i < actSession?.length; i++) {
     actSession[i].day = i + 1;
     daysToNumber.push(i);
   }
-  console.log("daysToNumber:", daysToNumber);
+  // console.log("daysToNumber:", daysToNumber);
 
   return (
     <div className="barChart-activity">
@@ -50,11 +50,23 @@ function BarChartActivity(props) {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="day" />
-          <YAxis />
+          <YAxis dataKey="kilogram" />
+
           <Tooltip />
           <Legend />
-          <Bar dataKey="kilogram" fill="black" />
-          <Bar dataKey="calories" fill="red" />
+
+          <Bar
+            dataKey="kilogram"
+            barSize={10}
+            radius={[5, 5, 0, 0]}
+            fill="black"
+          />
+          <Bar
+            dataKey="calories"
+            barSize={10}
+            radius={[5, 5, 0, 0]}
+            fill="red"
+          />
         </BarChart>
       </ResponsiveContainer>
     </div>

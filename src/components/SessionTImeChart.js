@@ -18,49 +18,7 @@ function SessionTimeChart(props) {
   const sessionsAverage = useFetchUrl(
     `/mock_data/user/${params.id}/average-sessions.json`
   );
-  console.log("sessionsAverage:", sessionsAverage);
-  // const getIntroOfPage = (label) => {
-  //   if (label === 1) {
-  //     return "Page A is about men's clothing";
-  //   }
-  //   if (label === 2) {
-  //     return "Page B is about women's dress";
-  //   }
-  //   if (label === 3) {
-  //     return "Page C is about women's bag";
-  //   }
-  //   if (label === 3) {
-  //     return "Page D is about household goods";
-  //   }
-  //   if (label === 4) {
-  //     return "Page E is about food";
-  //   }
-  //   if (label === 5) {
-  //     return "Page F is about baby food";
-  //   }
-  //   if (label === 6) {
-  //     return "Page F is about baby food";
-  //   }
-  //   if (label === 7) {
-  //     return;
-  //   }
-
-  //   return "";
-  // };
-
-  // const CustomTooltip = ({ active, payload, label }) => {
-  //   if (active && payload && payload.length) {
-  //     return (
-  //       <div className="custom-tooltip">
-  //         <p className="label">{`${label} : ${payload[0].value}`}</p>
-  //         <p className="intro">{getIntroOfPage(label)}</p>
-  //         {/* <p className="desc">Anything you want can be displayed here.</p> */}
-  //       </div>
-  //     );
-  //   }
-
-  //   return null;
-  // };
+  // console.log("sessionsAverage:", sessionsAverage);
 
   return (
     <div className="sessionTime-activity">
