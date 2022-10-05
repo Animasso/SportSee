@@ -19,7 +19,17 @@ function SessionTimeChart(props) {
     `/mock_data/user/${params.id}/average-sessions.json`
   );
   // console.log("sessionsAverage:", sessionsAverage);
+  const CustomTooltip = ({ active, payload }) => {
+    if (active) {
+      return (
+        <div className="custom-tooltip-time">
+          <p className="label-time">{payload[0].value}min</p>
+        </div>
+      );
+    }
 
+    return null;
+  };
   return (
     <div className="sessionTime-activity">
       <h1 className="activity">Durée moyenne des sessions</h1>
@@ -39,11 +49,7 @@ function SessionTimeChart(props) {
             domain={[0, "dataMax + 30"]}
             hide={true}
           />
-          <Tooltip
-            contentStyle={{ backgroundColor: "#ffffff", color: "#000000" }}
-            itemStyle={{ color: "#000000" }}
-            cursor={false}
-          />
+          <Tooltip content={<CustomTooltip />} />
           <Line
             type="monotone"
             dataKey="sessionLength"
