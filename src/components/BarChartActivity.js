@@ -1,5 +1,6 @@
 import useFetchUrl from "../hooks/useFetch";
 import { useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   BarChart,
   Bar,
@@ -12,26 +13,29 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-function BarChartActivity(props) {
+function BarChartActivity() {
+  //get the userId
   const params = useParams();
+
+  /** fetch the data including the activity of the user
+   * @type {{userId: number,sessions:[{day:"string",kilogram:number,calories:number}]}}
+   * @return a promesse
+   */
   const userActivity = useFetchUrl(
     `/mock_data/user/${params.id}/activity.json`
   );
-  // console.log("userActivity:", userActivity);
-  const actSession = userActivity?.sessions;
-  // console.log("actSession:", actSession);
-  const days = actSession?.map((days) => days?.day);
-  const kilo = actSession?.map((kilos) => kilos?.kilogram);
-  const calories = actSession?.map((calorie) => calorie?.calories);
-  // console.log("calories:", calories);
 
-  // console.log("kilo:", kilo);
-  // console.log("days:", days);
-  const daysToNumber = [];
+  const actSession = userActivity?.sessions;
+
+  //loop to convert days into one number from 1 to 7
   for (let i = 0; i < actSession?.length; i++) {
     actSession[i].day = i + 1;
-    daysToNumber.push(i);
   }
+  /**
+   * @prop {Boolean} active whether the component is active or not (mouse over)
+   * @prop {ArrayOfObject} payload Properties of each componant Bar
+   */
+
   const CustomTooltip = ({ active, payload }) => {
     if (active) {
       return (
@@ -44,8 +48,6 @@ function BarChartActivity(props) {
 
     return null;
   };
-
-  // console.log("daysToNumber:", daysToNumber);
 
   return (
     <div className="barChart-activity">
@@ -105,7 +107,10 @@ function BarChartActivity(props) {
             hide={true}
           />
 
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip
+            viewBox={{ x: 0, y: 0, width: 39, height: 25 }}
+            content={<CustomTooltip />}
+          />
 
           <Bar
             yAxisId="kilogram"
@@ -126,5 +131,10 @@ function BarChartActivity(props) {
     </div>
   );
 }
-
+BarChartActivity.propTypes = {
+  userId: PropTypes.number,
+  day: PropTypes.string,
+  kilogram: PropTypes.number,
+  calories: PropTypes.number,
+};
 export default BarChartActivity;

@@ -23,9 +23,11 @@
   background-color: #f50909;
   border: none;
 }
+
 .label,
 .intro {
   width: 100%;
+  margin: 0;
   color: #ffffff;
   font-family: Roboto;
   font-size: 7px;

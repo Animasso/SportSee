@@ -9,16 +9,46 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import useFetchUrl from "../hooks/useFetch";
-
 import { useParams } from "react-router-dom";
-// import { useEffect } from "react";
-
-function SessionTimeChart(props) {
+import PropTypes from "prop-types";
+function SessionTimeChart() {
   const params = useParams();
+
+  /** fetch the data including the time of an average session of the user
+   * @type {{userId: number,sessions:[{day:number|"string",sessionLength: number}]}}
+   * @return a promesse
+   */
   const sessionsAverage = useFetchUrl(
     `/mock_data/user/${params.id}/average-sessions.json`
   );
-  // console.log("sessionsAverage:", sessionsAverage);
+  const average = sessionsAverage?.sessions;
+
+  //function to convert the day into a letter of the week
+  const daySession = average?.map((data) => {
+    switch (data.day) {
+      case 1:
+        return { ...data, day: "L" };
+      case 2:
+        return { ...data, day: "M" };
+      case 3:
+        return { ...data, day: "M" };
+      case 4:
+        return { ...data, day: "J" };
+      case 5:
+        return { ...data, day: "V" };
+      case 6:
+        return { ...data, day: "S" };
+      case 7:
+        return { ...data, day: "D" };
+      default:
+        return { ...data };
+    }
+  });
+  /**
+   * @prop {Boolean} active whether the component is active or not (mouse over)
+   * @prop {ArrayOfObject} payload Properties of each componant Bar
+   */
+
   const CustomTooltip = ({ active, payload }) => {
     if (active) {
       return (
@@ -34,7 +64,7 @@ function SessionTimeChart(props) {
     <div className="sessionTime-activity">
       <h1 className="activity">Durée moyenne des sessions</h1>
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={sessionsAverage?.sessions}>
+        <LineChart data={daySession}>
           <CartesianGrid horizontal="" vertical="" />
           <XAxis
             type="category"
@@ -49,7 +79,11 @@ function SessionTimeChart(props) {
             domain={[0, "dataMax + 30"]}
             hide={true}
           />
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip
+            content={<CustomTooltip />}
+            // wrapperStyle={{ outline: none }}
+            // wrapperStyle={none}
+          />
           <Line
             type="monotone"
             dataKey="sessionLength"
