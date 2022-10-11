@@ -1,19 +1,19 @@
 import React from "react";
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+// import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import { ResponsiveContainer, RadialBarChart, RadialBar } from "recharts";
 import useFetchUrl from "../hooks/useFetch";
 import { useParams } from "react-router-dom";
 
 function PieChartActivity(props) {
   const params = useParams();
-  const userDataId = useFetchUrl(`/mock_data/user/${params.id}/data.json`);
-  //   console.log("userDataId:", userDataId);
-  const score = userDataId?.todayScore || userDataId?.score;
-  //   console.log("score:", score);
-  const COLORS = ["#FF8042"];
+  const userDataScore = useFetchUrl(`/mock_data/user/${params.id}/data.json`);
+  const score = userDataScore?.todayScore * 100 || userDataScore?.score * 100;
+  console.log("score:", score);
+
   return (
     <div className="pie-activity">
-      {/*
-      <PieChart width={800} height={400}>
+      {<ResponsiveContainer></ResponsiveContainer>}
+      {/* { <PieChart width={800} height={400}>
         <Pie
           data={score}
           cx={120}
@@ -24,7 +24,7 @@ function PieChartActivity(props) {
           paddingAngle={5}
           dataKey="value"
         ></Pie>
-      </PieChart> */}
+      </PieChart> } */}
     </div>
   );
 }
