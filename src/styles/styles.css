@@ -7,3 +7,6 @@
 @import "./barchart.css";
 @import "./radarChart.css";
 @import "./pieChart.css";
+
+@media screen and (max-width: 1024px) {
+}
