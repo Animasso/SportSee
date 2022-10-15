@@ -42,3 +42,13 @@
   letter-spacing: 0px;
   margin: 0;
 }
+@media screen and (max-width: 1025px) {
+  .sessionTime-activity {
+    width: 180px;
+    height: 200px;
+  }
+  .recharts-responsive-container {
+    width: 180px;
+    height: 200px;
+  }
+}

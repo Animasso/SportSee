@@ -65,3 +65,24 @@ h1 {
   font-weight: 500;
   line-height: 24px;
 }
+@media screen and (max-width: 1025px) {
+  .icon {
+    background-color: #f5f5f582;
+    height: 85px;
+  }
+  .user-infos {
+    top: 31%;
+    height: 535px;
+  }
+  h1 {
+    top: 15%;
+  }
+  .congrat {
+    top: 24%;
+  }
+  .infos {
+    /* background-color: cornflowerblue; */
+    width: 175px;
+    height: 85px;
+  }
+}

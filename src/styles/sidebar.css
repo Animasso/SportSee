@@ -17,7 +17,7 @@
   top: 33.89%;
   bottom: 59.86%;
   width: 64px;
-  height: 316px;
+  height: 350px;
   background-color: BLACK;
   border-radius: 6px;
 }
@@ -33,4 +33,15 @@
   line-height: 24px;
   color: white;
   margin: auto;
+}
+@media screen and (max-width: 1025px) {
+  .nav-link {
+    top: 26.89%;
+  }
+  .nav-copyright {
+    bottom: 15px;
+  }
+  .sidebar {
+    height: 688px;
+  }
 }

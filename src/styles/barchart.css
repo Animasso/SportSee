@@ -107,3 +107,10 @@ p.blackr {
   margin-bottom: 20px;
   justify-content: space-around;
 }
+@media screen and (max-width: 1025px) {
+  .barChart-activity {
+    height: 280px;
+    width: 594px;
+    top: 34%;
+  }
+}

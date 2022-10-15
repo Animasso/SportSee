@@ -4,7 +4,14 @@
   justify-content: space-between;
   width: 835px;
   height: 270px;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
   top: 112%;
   left: 17%;
+}
+@media screen and (max-width: 1025px) {
+  .cardChart {
+    width: 594px;
+    height: 210px;
+    top: 73%;
+  }
 }

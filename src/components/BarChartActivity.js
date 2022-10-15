@@ -12,14 +12,15 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { number } from "prop-types";
 
 function BarChartActivity() {
   //get the userId
   const params = useParams();
 
   /** fetch the data including the activity of the user
-   * @type {{userId: number,sessions:[{day:"string",kilogram:number,calories:number}]}}
-   * @return a promesse
+   * @type {{userId: number,sessions:{Array.<{day:number|string, kilogram:number,calories:number}>}}}
+   * @return  Promise
    */
   const userActivity = useFetchUrl(
     `/mock_data/user/${params.id}/activity.json`
@@ -65,10 +66,10 @@ function BarChartActivity() {
           </div>
         </div>
       </header>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer height={200}>
         <BarChart
           // width={500}
-          // height={300}
+
           barGap={8}
           barCategoryGap={1}
           data={actSession}
@@ -131,10 +132,15 @@ function BarChartActivity() {
     </div>
   );
 }
+
 BarChartActivity.propTypes = {
   userId: PropTypes.number,
-  day: PropTypes.string,
-  kilogram: PropTypes.number,
-  calories: PropTypes.number,
+  sessions: PropTypes.arrayOf(
+    PropTypes.shape({
+      day: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      kilogram: PropTypes.number,
+      calories: PropTypes.number,
+    })
+  ),
 };
 export default BarChartActivity;

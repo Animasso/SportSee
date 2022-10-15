@@ -1,10 +1,10 @@
 // import axios from "axios";
 import { useState, useEffect } from "react";
-/**
- * function to fetch data from the mock file
- * @param {string} path
- * @returns promises
- */
+// /**
+//  * function to fetch data from the mock file
+//  * @param {string} path
+//  * @returns Promesse
+//  */
 function useFetchUrl(path) {
   const [data, setData] = useState([]);
   useEffect(() => {

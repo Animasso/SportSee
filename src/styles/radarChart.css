@@ -8,3 +8,14 @@
   -o-border-radius: 5px;
   background-color: rgb(0, 0, 0);
 }
+@media screen and (max-width: 1025px) {
+  .sessionTime-performance {
+    height: 200px;
+
+    width: 180px;
+  }
+  /* .recharts-wrapper {
+    height: 200px;
+    width: 170px;
+  } */
+}
