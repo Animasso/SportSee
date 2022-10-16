@@ -1,11 +1,5 @@
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
-// import {
-//   ResponsiveContainer,
-//   RadialBarChart,
-//   RadialBar,
-//   Legend,
-// } from "recharts";
 import useFetchUrl from "../hooks/useFetch";
 import { useParams } from "react-router-dom";
 
@@ -15,6 +9,9 @@ function PieChartActivity(props) {
 
   const score = [
     { value: userDataScore.todayScore * 100 || userDataScore.score * 100 },
+    {
+      value: 100 - userDataScore.todayScore * 100 || userDataScore.score * 100,
+    },
   ];
   console.log("score:", score);
 
@@ -33,15 +30,16 @@ function PieChartActivity(props) {
                 outerRadius={80}
                 startAngle={90}
               >
-                {score.map(
-                  (entry, index) =>
-                    index === 0 && (
-                      <Cell
-                        key={`cell-${index}`}
-                        cornerRadius={10}
-                        fill="#ff0000"
-                      />
-                    )
+                {score.map((entry, index) =>
+                  index === 0 ? (
+                    <Cell
+                      key={`cell-${index}`}
+                      cornerRadius={10}
+                      fill="#ff0000 "
+                    />
+                  ) : (
+                    <Cell key={`cell-${entry}`} fill="#FBFBFB" />
+                  )
                 )}
               </Pie>
             </PieChart>
