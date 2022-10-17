@@ -13,9 +13,9 @@ function PieChartActivity(props) {
       value: 100 - userDataScore.todayScore * 100 || userDataScore.score * 100,
     },
   ];
-  console.log("score:", score);
+  // console.log("score:", score);
 
-  console.log("userDataScore:", userDataScore);
+  // console.log("userDataScore:", userDataScore);
 
   return (
     <div className="pie-activity">

@@ -1,3 +1,60 @@
+![Markdown Logo](src/assets/logoSport.png)
+
+
+
+## 
+The Projet is about a startup specialized in sport coaching 
+
+The main goal was to building of a page that allows users to follow their progression (number of session ,number of calories burned....)through different **charts** 
+
+---
+---
+
+## Lauching the Back-end
+Clone the repo of the back-end
+
+
+[https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard.git](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard.git "Link to the Back-end")
+
+Install the dependencies
+```
+yarn (or yarn install) or npm i (or npm install)
+```
+Then run the command
+```
+yarn dev or npm run start 
+ ```
+ to launch the back-end on port 3000 http://localhost:3000
+
+---
+## Lauching the Front-end
+
+Clone the repo of the front-end
+ ```
+ https://github.com/Animasso/SportSee.git
+  ```
+
+  Install the dependencies
+```
+yarn (or yarn install) or npm i (or npm install)
+```
+
+Then run the command
+```
+yarn dev or npm run start 
+ ```
+ to launch the Front-end on port 3000 http://localhost:3001
+
+---
+
+## Users 
+In our case we using 2 users
+
+| Name   | id    |
+|--------|-------|
+|Karl Dovineau| 12|
+|Cecilia Ratorez|18|
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

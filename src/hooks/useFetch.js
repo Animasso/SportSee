@@ -16,7 +16,7 @@ function useFetchUrl(path) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setData(data);
       })
       .catch((err) => {

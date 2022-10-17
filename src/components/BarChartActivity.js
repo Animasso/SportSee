@@ -4,15 +4,12 @@ import PropTypes from "prop-types";
 import {
   BarChart,
   Bar,
-  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
-import { number } from "prop-types";
 
 function BarChartActivity() {
   //get the userId
@@ -111,6 +108,7 @@ function BarChartActivity() {
           <Tooltip
             viewBox={{ x: 0, y: 0, width: 39, height: 25 }}
             content={<CustomTooltip />}
+            wrapperStyle={{ outline: "none" }}
           />
 
           <Bar
@@ -133,14 +131,14 @@ function BarChartActivity() {
   );
 }
 
-BarChartActivity.propTypes = {
-  userId: PropTypes.number,
-  sessions: PropTypes.arrayOf(
-    PropTypes.shape({
-      day: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      kilogram: PropTypes.number,
-      calories: PropTypes.number,
-    })
-  ),
-};
+// BarChartActivity.propTypes = {
+//   userId: PropTypes.number,
+//   sessions: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       day: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+//       kilogram: PropTypes.number,
+//       calories: PropTypes.number,
+//     })
+//   ),
+// };
 export default BarChartActivity;

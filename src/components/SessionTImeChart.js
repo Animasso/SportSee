@@ -49,7 +49,7 @@ function SessionTimeChart() {
    * @prop {ArrayOfObject} payload Properties of each componant Bar
    */
 
-  const CustomTooltip = ({ active, payload }) => {
+  const CustomTooltipTime = ({ active, payload }) => {
     if (active) {
       return (
         <div className="custom-tooltip-time">
@@ -80,9 +80,8 @@ function SessionTimeChart() {
             hide={true}
           />
           <Tooltip
-            content={<CustomTooltip />}
-            // wrapperStyle={{ outline: none }}
-            // wrapperStyle={none}
+            content={<CustomTooltipTime />}
+            wrapperStyle={{ outline: "none" }}
           />
           <Line
             type="monotone"

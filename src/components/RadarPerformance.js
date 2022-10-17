@@ -43,19 +43,19 @@ function RadarPerformance() {
     });
   }
   const exemple = capitalizeWords(["hello", "you", "part"]);
-  console.log("exemple:", exemple);
+  // console.log("exemple:", exemple);
 
   const kindCap = capitalizeWords(kindUpper);
-  console.log("kindCap:", kindCap);
-  console.log("userData:", userData);
+  // console.log("kindCap:", kindCap);
+  // console.log("userData:", userData);
 
   const performance = userData?.map((data) => ({
     ...data,
     kind: userPerformance?.kind[data.kind],
   }));
 
-  console.log("performance:", performance);
-  console.log("kindCap:", kindCap);
+  // console.log("performance:", performance);
+  // console.log("kindCap:", kindCap);
   return (
     <div className="sessionTime-performance">
       {
