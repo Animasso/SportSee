@@ -11,13 +11,16 @@ import {
 
 import useFetchUrl from "../hooks/useFetch";
 import { useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 function RadarPerformance() {
   const params = useParams();
 
-  // /** fetch the data including the performance of the user
-  //  * @type {{userId: number,kind:{key:number},data: [{value:number, kind:number}]}}
-  //  * @return {}
-  //  */
+  /** fetch the data including the performance of the user
+   * @type {{userId: number,kind:{key:number},data: [{value:number, kind:number}]}}
+   * @returns {Promise}
+   */
+  //  const getUrl = BackendURLs.GetUsersPerformance;
+  //  const userPerformance = useFetchUrl(getUrl(params.id));
 
   const userPerformance = useFetchUrl(
     `/mock_data/user/${params.id}/performance.json`
@@ -32,30 +35,20 @@ function RadarPerformance() {
   }
   /**
    *
-   * @param {array} arr array of string
+   * @param {array} arr array of strings
    * @returns []
    */
 
   //function to change the first letter of each string of an array
-  function capitalizeWords(arr) {
-    return arr.map((element) => {
-      return element.charAt(0).toUpperCase() + element.slice(1).toLowerCase();
-    });
+  function capitalize(title) {
+    return title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
   }
-  const exemple = capitalizeWords(["hello", "you", "part"]);
-  // console.log("exemple:", exemple);
-
-  const kindCap = capitalizeWords(kindUpper);
-  // console.log("kindCap:", kindCap);
-  // console.log("userData:", userData);
 
   const performance = userData?.map((data) => ({
     ...data,
-    kind: userPerformance?.kind[data.kind],
+    kind: capitalize(userPerformance?.kind[data.kind]),
   }));
 
-  // console.log("performance:", performance);
-  // console.log("kindCap:", kindCap);
   return (
     <div className="sessionTime-performance">
       {
@@ -69,7 +62,7 @@ function RadarPerformance() {
                 tickLine={false}
                 axisLine={false}
                 label={false}
-                fontSize={12}
+                fontSize={9}
               />
               <PolarRadiusAxis axisLine={false} tick={false} label={false} />
               <Radar
@@ -86,5 +79,22 @@ function RadarPerformance() {
     </div>
   );
 }
+RadarPerformance.propTypes = {
+  userId: PropTypes.number,
+  kind: PropTypes.shape({
+    1: PropTypes.string,
+    2: PropTypes.string,
+    3: PropTypes.string,
+    4: PropTypes.string,
+    5: PropTypes.string,
+    6: PropTypes.string,
+  }),
 
+  data: PropTypes.shape([
+    {
+      value: PropTypes.number,
+      kind: PropTypes.number,
+    },
+  ]),
+};
 export default RadarPerformance;

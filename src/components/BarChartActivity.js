@@ -17,7 +17,7 @@ function BarChartActivity() {
 
   /** fetch the data including the activity of the user
    * @type {{userId: number,sessions:{Array.<{day:number|string, kilogram:number,calories:number}>}}}
-   * @return  Promise
+   *@returns {Promise}
    */
   const userActivity = useFetchUrl(
     `/mock_data/user/${params.id}/activity.json`
@@ -131,14 +131,14 @@ function BarChartActivity() {
   );
 }
 
-// BarChartActivity.propTypes = {
-//   userId: PropTypes.number,
-//   sessions: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       day: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//       kilogram: PropTypes.number,
-//       calories: PropTypes.number,
-//     })
-//   ),
-// };
+BarChartActivity.propTypes = {
+  userId: PropTypes.number,
+  sessions: PropTypes.arrayOf(
+    PropTypes.shape({
+      day: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      kilogram: PropTypes.number,
+      calories: PropTypes.number,
+    })
+  ),
+};
 export default BarChartActivity;

@@ -14,10 +14,10 @@ import PropTypes from "prop-types";
 function SessionTimeChart() {
   const params = useParams();
 
-  // /** fetch the data including the time of an average session of the user
-  //  * @type {{userId: number,sessions:[{day:number|"string",sessionLength: number}]}}
-  //  * @return a promesse
-  //  */
+  /** fetch the data including the time of an average session of the user
+   * @type {{userId: number,sessions:[{day:number|"string",sessionLength: number}]}}
+   * @returns {Promise}
+   */
   const sessionsAverage = useFetchUrl(
     `/mock_data/user/${params.id}/average-sessions.json`
   );
@@ -96,5 +96,13 @@ function SessionTimeChart() {
     </div>
   );
 }
-
+SessionTimeChart.propTypes = {
+  userId: PropTypes.number,
+  sessions: PropTypes.shape([
+    {
+      day: PropTypes.number,
+      sessionLength: PropTypes.number,
+    },
+  ]),
+};
 export default SessionTimeChart;

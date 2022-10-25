@@ -4,11 +4,14 @@ import FakeLogin from "./Pages/FakeLogin";
 import { Routes, Route } from "react-router-dom";
 import useFetchUrl from "./hooks/useFetch";
 import Home from "./Pages/Home";
+import { BackendURLs } from "./constantes";
 
 // import { useParams } from "react-router-dom";
 
 //import le fetch ici avec le data user et le faire passer en tant que props dans les elelment
 function App() {
+  // const getUrl = BackendURLs.GetUsersData;
+  // const dataUsers = useFetchUrl(getUrl());
   const dataUsers = useFetchUrl("mock_data/user_data.json");
   console.log("dataUsers:", dataUsers);
   // const params = useParams();

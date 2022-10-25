@@ -1,6 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import maleAvatar from "../assets/avatarHomme.jpg";
 import femaleAvatar from "../assets/avatarFemme.jpg";
+/**
+ *
+ * @param {*} props
+ * @returns
+ */
 function UserCard(props) {
   const { dataUsers } = props;
   let navigate = useNavigate();
