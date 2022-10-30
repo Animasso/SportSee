@@ -8,7 +8,7 @@ import iconProtein from "../assets/protein-icon.png";
 function UserName(props) {
   //   const { dataUsers } = props;
   const params = useParams();
-  const userDataInfo = useFetchUrl(`/mock_data/user/${params.id}/data.json`);
+  const userDataInfo = useFetchUrl(`/user/${params.id}/data.json`);
   console.log("userDataInfo:", userDataInfo);
 
   return (

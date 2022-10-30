@@ -3,6 +3,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import useFetchUrl from "../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import { BackendURLs } from "../constantes";
 
 /**
  * 
@@ -12,17 +13,23 @@ import PropTypes from "prop-types";
  */
 
 function PieChartActivity(props) {
-  const params = useParams();
-  const userDataScore = useFetchUrl(`/mock_data/user/${params.id}/data.json`);
+  const userId = useParams();
+  const getUrl = BackendURLs.GetUserData[process.env.REACT_APP_MODE];
+  console.log("getUrl:", getUrl);
+  const userDataScore = useFetchUrl(getUrl(userId.id));
+  console.log("userDataScore:", userDataScore);
+  // const userDataScore = useFetchUrl(`/user/${userId.id}/data.json`);
 
   // convert the todayScore or score into a pourcentaage
   const score = [
-    { value: userDataScore.todayScore * 100 || userDataScore.score * 100 },
+    {
+      value: userDataScore.todayScore * 100 || userDataScore.score * 100,
+    },
     {
       value: 100 - userDataScore.todayScore * 100 || userDataScore.score * 100,
     },
   ];
-  // console.log("score:", score);
+  console.log("score:", score);
 
   // console.log("userDataScore:", userDataScore);
 

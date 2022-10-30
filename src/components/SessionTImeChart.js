@@ -10,17 +10,21 @@ import {
 } from "recharts";
 import useFetchUrl from "../hooks/useFetch";
 import { useParams } from "react-router-dom";
+import { BackendURLs } from "../constantes";
 import PropTypes from "prop-types";
 function SessionTimeChart() {
-  const params = useParams();
+  const userId = useParams();
 
   /** fetch the data including the time of an average session of the user
    * @type {{userId: number,sessions:[{day:number|"string",sessionLength: number}]}}
    * @returns {Promise}
    */
-  const sessionsAverage = useFetchUrl(
-    `/mock_data/user/${params.id}/average-sessions.json`
-  );
+  const getUrl = BackendURLs.GetUsersAverageSession[process.env.REACT_APP_MODE];
+  console.log("getUrl:", getUrl);
+  const sessionsAverage = useFetchUrl(getUrl(userId.id));
+  // const sessionsAverage = useFetchUrl(
+  //   `/user/${params.id}/average-sessions.json`
+  // );
   const average = sessionsAverage?.sessions;
 
   //function to convert the day into a letter of the week

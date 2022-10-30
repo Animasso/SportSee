@@ -10,20 +10,25 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
+import { BackendURLs } from "../constantes";
 function BarChartActivity() {
   //get the userId
-  const params = useParams();
+  const userId = useParams();
 
   /** fetch the data including the activity of the user
    * @type {{userId: number,sessions:{Array.<{day:number|string, kilogram:number,calories:number}>}}}
    *@returns {Promise}
    */
-  const userActivity = useFetchUrl(
-    `/mock_data/user/${params.id}/activity.json`
-  );
+  // const userActivity = useFetchUrl(`/user/${params.id}/activity.json`);
+  // const userActivity = useFetchUrl(`/user/${params.id}/activity.json`);
 
+  const getUrl = BackendURLs.GetUsersActivity[process.env.REACT_APP_MODE];
+  console.log("getUrl:", getUrl);
+  const userActivity = useFetchUrl(getUrl(userId.id));
+  console.log("userActivity:", userActivity);
+  //faire une condition if else  avec le live et le mock
   const actSession = userActivity?.sessions;
+  console.log("actSession:", actSession);
 
   //loop to convert days into one number from 1 to 7
   for (let i = 0; i < actSession?.length; i++) {

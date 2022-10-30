@@ -1,15 +1,19 @@
 export const BackendURLs = {
   GetUsersActivity: {
-    LIVE: (userId) => `http://localhost:3001/user/${userId}/activity`,
-    MOCK: (userId) => `/mock_data/user/${userId}/activity.json`,
+    LIVE: (userId) => `http://localhost:3000/user/${userId}/activity`,
+    MOCK: (userId) => `/user/${userId}/activity.json`,
   },
   GetUsersPerformance: {
-    LIVE: (userId) => `http://localhost:3001/user/${userId}/performance`,
-    MOCK: (userId) => `/mock_data/user/${userId}/performance.json`,
+    LIVE: (userId) => `http://localhost:3000/user/${userId}/performance`,
+    MOCK: (userId) => `/user/${userId}/performance.json`,
   },
   GetUsersAverageSession: {
-    LIVE: (userId) => `http://localhost:3001/user/${userId}/average-sessions`,
-    MOCK: (userId) => `/mock_data/user/${userId}/average-sessions.json`,
+    LIVE: (userId) => `http://localhost:3000/user/${userId}/average-sessions`,
+    MOCK: (userId) => `/user/${userId}/average-sessions.json`,
   },
-  GetUsersData: () => `/mock_data/users/data.json`,
+  GetUserData: {
+    LIVE: (userId) => `http://localhost:3000/user/${userId}`,
+    MOCK: (userId) => `/user/${userId}/data.json`,
+  },
+  GetUsersData: () => `user/user_data.json`,
 };

@@ -12,32 +12,36 @@ import {
 import useFetchUrl from "../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import { BackendURLs } from "../constantes";
 function RadarPerformance() {
-  const params = useParams();
+  const userId = useParams();
+  console.log("userId:", userId);
+  console.log(userId.id);
+  // /** fetch the data including the performance of the user
+  //  * @type {{userId: number,kind:{key:number},data: [{value:number, kind:number}]}}
+  //  * @returns {Promise}
+  //  */
+  const getUrl = BackendURLs.GetUsersPerformance[process.env.REACT_APP_MODE];
+  console.log("getUrl:", getUrl);
+  const userPerformance = useFetchUrl(getUrl(userId.id));
+  console.log("userPerformance:", userPerformance);
 
-  /** fetch the data including the performance of the user
-   * @type {{userId: number,kind:{key:number},data: [{value:number, kind:number}]}}
-   * @returns {Promise}
-   */
-  //  const getUrl = BackendURLs.GetUsersPerformance;
-  //  const userPerformance = useFetchUrl(getUrl(params.id));
-
-  const userPerformance = useFetchUrl(
-    `/mock_data/user/${params.id}/performance.json`
-  );
+  // const userPerformance = useFetchUrl(`/user/${userId.id}/performance.json`);
 
   const userData = userPerformance?.data;
+  console.log("userData:", userData);
+
   const kind = userPerformance?.kind;
-  // console.log("kind:", kind);
-  const kindUpper = [];
-  for (const property in kind) {
-    kindUpper.push(kind[property]);
-  }
-  /**
-   *
-   * @param {array} arr array of strings
-   * @returns []
-   */
+  console.log("kind:", kind);
+  // const kindUpper = [];
+  // for (const property in kind) {
+  //   kindUpper.push(kind[property]);
+  // }
+  // /**
+  //  *
+  //  * @param {array} arr array of strings
+  //  * @returns []
+  //  */
 
   //function to change the first letter of each string of an array
   function capitalize(title) {
