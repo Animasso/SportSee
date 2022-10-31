@@ -64,41 +64,43 @@ function SessionTimeChart() {
 
     return null;
   };
-  return (
-    <div className="sessionTime-activity">
-      <h1 className="activity">Durée moyenne des sessions</h1>
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={daySession}>
-          <CartesianGrid horizontal="" vertical="" />
-          <XAxis
-            type="category"
-            dataKey="day"
-            tickLine={true}
-            stroke=""
-            padding={{ right: 5, left: 5 }}
-            tick={{ fontSize: 13, stroke: "white", opacity: 0.8 }}
-          />
-          <YAxis
-            dataKey="sessionLength"
-            domain={[0, "dataMax + 30"]}
-            hide={true}
-          />
-          <Tooltip
-            content={<CustomTooltipTime />}
-            wrapperStyle={{ outline: "none" }}
-          />
-          <Line
-            type="monotone"
-            dataKey="sessionLength"
-            stroke="rgba(255, 255, 255, 0.7)"
-            strokeWidth={2}
-            dot={false}
-            activeDot={{ stroke: "white", r: 4, strokeWidth: 2 }}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  );
+  if (daySession?.length > 0) {
+    return (
+      <div className="sessionTime-activity">
+        <h1 className="activity">Durée moyenne des sessions</h1>
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={daySession}>
+            <CartesianGrid horizontal="" vertical="" />
+            <XAxis
+              type="category"
+              dataKey="day"
+              tickLine={true}
+              stroke=""
+              padding={{ right: 5, left: 5 }}
+              tick={{ fontSize: 13, stroke: "white", opacity: 0.8 }}
+            />
+            <YAxis
+              dataKey="sessionLength"
+              domain={[0, "dataMax + 30"]}
+              hide={true}
+            />
+            <Tooltip
+              content={<CustomTooltipTime />}
+              wrapperStyle={{ outline: "none" }}
+            />
+            <Line
+              type="monotone"
+              dataKey="sessionLength"
+              stroke="rgba(255, 255, 255, 0.7)"
+              strokeWidth={2}
+              dot={false}
+              activeDot={{ stroke: "white", r: 4, strokeWidth: 2 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    );
+  }
 }
 SessionTimeChart.propTypes = {
   userId: PropTypes.number,

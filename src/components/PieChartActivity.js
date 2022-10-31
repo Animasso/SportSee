@@ -7,9 +7,9 @@ import { BackendURLs } from "../constantes";
 
 /**
  * 
- *  @type {{userId: number,userInfos:{firstName:string,lastname:string,age: number},score: number ,keyData:{calorieCount: number,proteinCount: number, lipidCount:number}
+ *  
    
- * @returns {Promise}
+ * @returns {React.ReactElement}
  */
 
 function PieChartActivity(props) {
@@ -32,43 +32,44 @@ function PieChartActivity(props) {
   console.log("score:", score);
 
   // console.log("userDataScore:", userDataScore);
-
-  return (
-    <div className="pie-activity">
-      {
-        <>
-          <ResponsiveContainer>
-            <PieChart>
-              <Pie
-                data={score}
-                dataKey="value"
-                innerRadius={70}
-                outerRadius={80}
-                startAngle={90}
-              >
-                {score.map((entry, index) =>
-                  index === 0 ? (
-                    <Cell
-                      key={`cell-${index}`}
-                      cornerRadius={10}
-                      fill="#ff0000"
-                    />
-                  ) : (
-                    <Cell key={`cell-${entry}`} fill="#FBFBFB" />
-                  )
-                )}
-              </Pie>
-            </PieChart>
-          </ResponsiveContainer>
-          <div className="score">
-            <span className="num-score">{score[0].value}%</span> <br />
-            de votre
-            <br /> objectif
-          </div>
-        </>
-      }
-    </div>
-  );
+  if (score?.length > 0) {
+    return (
+      <div className="pie-activity">
+        {
+          <>
+            <ResponsiveContainer>
+              <PieChart>
+                <Pie
+                  data={score}
+                  dataKey="value"
+                  innerRadius={70}
+                  outerRadius={80}
+                  startAngle={90}
+                >
+                  {score.map((entry, index) =>
+                    index === 0 ? (
+                      <Cell
+                        key={`cell-${index}`}
+                        cornerRadius={10}
+                        fill="#ff0000"
+                      />
+                    ) : (
+                      <Cell key={`cell-${entry}`} fill="#FBFBFB" />
+                    )
+                  )}
+                </Pie>
+              </PieChart>
+            </ResponsiveContainer>
+            <div className="score">
+              <span className="num-score">{score[0].value}%</span> <br />
+              de votre
+              <br /> objectif
+            </div>
+          </>
+        }
+      </div>
+    );
+  }
 }
 PieChartActivity.propTypes = {
   userId: PropTypes.number,

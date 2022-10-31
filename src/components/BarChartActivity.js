@@ -51,89 +51,90 @@ function BarChartActivity() {
 
     return null;
   };
+  if (actSession?.length > 0) {
+    return (
+      <div className="barChart-activity">
+        <header>
+          <div className="daily-activity">Activité quotidienne</div>
+          <div className="round">
+            <div className=" color">
+              <div className="blackr"></div>
+              <p>Poids (kg)</p>
+            </div>
 
-  return (
-    <div className="barChart-activity">
-      <header>
-        <div className="daily-activity">Activité quotidienne</div>
-        <div className="round">
-          <div className=" color">
-            <div className="blackr"></div>
-            <p>Poids (kg)</p>
+            <div className=" colorRR">
+              <div className="redr"></div>
+              <p>Calories brûlées (kCal)</p>
+            </div>
           </div>
+        </header>
+        <ResponsiveContainer height={200}>
+          <BarChart
+            // width={500}
 
-          <div className=" colorRR">
-            <div className="redr"></div>
-            <p>Calories brûlées (kCal)</p>
-          </div>
-        </div>
-      </header>
-      <ResponsiveContainer height={200}>
-        <BarChart
-          // width={500}
+            barGap={8}
+            barCategoryGap={1}
+            data={actSession}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              dataKey="day"
+              tickLine={false}
+              tick={{ fontSize: 14 }}
+              dy={15}
+              stroke="1 1"
+            />
+            <YAxis
+              yAxisId="kilogram"
+              dataKey="kilogram"
+              type="number"
+              domain={["dataMin - 2", "dataMax + 1"]}
+              tickCount="4"
+              axisLine={false}
+              orientation="right"
+              tickLine={false}
+              tick={{ fontSize: 14 }}
+              dx={15}
+            />
+            <YAxis
+              yAxisId="calories"
+              dataKey="calories"
+              type="number"
+              domain={["dataMin - 20", "dataMax + 10"]}
+              hide={true}
+            />
 
-          barGap={8}
-          barCategoryGap={1}
-          data={actSession}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            dataKey="day"
-            tickLine={false}
-            tick={{ fontSize: 14 }}
-            dy={15}
-            stroke="1 1"
-          />
-          <YAxis
-            yAxisId="kilogram"
-            dataKey="kilogram"
-            type="number"
-            domain={["dataMin - 2", "dataMax + 1"]}
-            tickCount="4"
-            axisLine={false}
-            orientation="right"
-            tickLine={false}
-            tick={{ fontSize: 14 }}
-            dx={15}
-          />
-          <YAxis
-            yAxisId="calories"
-            dataKey="calories"
-            type="number"
-            domain={["dataMin - 20", "dataMax + 10"]}
-            hide={true}
-          />
+            <Tooltip
+              viewBox={{ x: 0, y: 0, width: 39, height: 25 }}
+              content={<CustomTooltip />}
+              wrapperStyle={{ outline: "none" }}
+            />
 
-          <Tooltip
-            viewBox={{ x: 0, y: 0, width: 39, height: 25 }}
-            content={<CustomTooltip />}
-            wrapperStyle={{ outline: "none" }}
-          />
-
-          <Bar
-            yAxisId="kilogram"
-            dataKey="kilogram"
-            barSize={8}
-            radius={[5, 5, 0, 0]}
-            fill="black"
-          />
-          <Bar
-            yAxisId="calories"
-            dataKey="calories"
-            barSize={8}
-            radius={[5, 5, 0, 0]}
-            fill="red"
-          />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-  );
+            <Bar
+              yAxisId="kilogram"
+              dataKey="kilogram"
+              barSize={8}
+              radius={[5, 5, 0, 0]}
+              fill="black"
+            />
+            <Bar
+              yAxisId="calories"
+              dataKey="calories"
+              barSize={8}
+              radius={[5, 5, 0, 0]}
+              fill="red"
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    );
+  }
 }
 
 BarChartActivity.propTypes = {
