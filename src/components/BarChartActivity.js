@@ -27,7 +27,7 @@ function BarChartActivity() {
   const userActivity = useFetchUrl(getUrl(userId.id));
   console.log("userActivity:", userActivity);
   //faire une condition if else  avec le live et le mock
-  const actSession = userActivity?.sessions;
+  const actSession = userActivity?.data?.sessions;
   console.log("actSession:", actSession);
 
   //loop to convert days into one number from 1 to 7

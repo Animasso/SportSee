@@ -25,7 +25,7 @@ function SessionTimeChart() {
   // const sessionsAverage = useFetchUrl(
   //   `/user/${params.id}/average-sessions.json`
   // );
-  const average = sessionsAverage?.sessions;
+  const average = sessionsAverage?.data?.sessions;
 
   //function to convert the day into a letter of the week
   const daySession = average?.map((data) => {

@@ -17,7 +17,7 @@ function UserName(props) {
         <h1>
           Bonjour{" "}
           <span className="first-name">
-            {userDataInfo?.userInfos?.firstName}
+            {userDataInfo?.data?.userInfos?.firstName}
           </span>
         </h1>
         <p className="congrat">
@@ -29,7 +29,7 @@ function UserName(props) {
               <img src={iconCalories} alt="" />
               <div className="exp">
                 <div className="substrats-number">
-                  {userDataInfo?.keyData?.calorieCount}kCal
+                  {userDataInfo?.data?.keyData?.calorieCount}kCal
                 </div>
                 <div className="substrats">Calories</div>
               </div>
@@ -41,7 +41,7 @@ function UserName(props) {
                 <img src={iconProtein} alt="" />
                 <div className="exp">
                   <div className="substrats-number">
-                    {userDataInfo?.keyData?.proteinCount}g
+                    {userDataInfo?.data?.keyData?.proteinCount}g
                   </div>
                   <div className="substrats">Proteines</div>
                 </div>
@@ -54,7 +54,7 @@ function UserName(props) {
                 <img src={iconCarbs} alt="" />
                 <div className="exp">
                   <div className="substrats-number">
-                    {userDataInfo?.keyData?.carbohydrateCount}g
+                    {userDataInfo?.data?.keyData?.carbohydrateCount}g
                   </div>
                   <div className="substrats">Glucides</div>
                 </div>
@@ -67,7 +67,7 @@ function UserName(props) {
                 <img src={iconFat} alt="" />
                 <div className="exp">
                   <div className="substrats-number">
-                    {userDataInfo?.keyData?.lipidCount}g
+                    {userDataInfo?.data?.keyData?.lipidCount}g
                   </div>
                   <div className="substrats">Lipides</div>
                 </div>

@@ -29,7 +29,7 @@ function RadarPerformance() {
   const userPerformance = useFetchUrl(getUrl(userId.id));
   console.log("userPerformance:", userPerformance);
   // const userPerformance = useFetchUrl(`/user/${userId.id}/performance.json`);
-  const userData = userPerformance?.data;
+  const userData = userPerformance?.data?.data;
   console.log("userData:", userData);
 
   const kind = userPerformance?.kind;
@@ -63,7 +63,7 @@ function RadarPerformance() {
    */
   const performance = userData?.map((data) => ({
     ...data,
-    kind: enToFr(userPerformance?.kind[data.kind]),
+    kind: enToFr(userPerformance?.data?.kind[data.kind]),
   }));
   console.log("performance:", performance);
   if (performance?.length > 0) {

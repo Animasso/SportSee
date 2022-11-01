@@ -23,10 +23,13 @@ function PieChartActivity(props) {
   // convert the todayScore or score into a pourcentaage
   const score = [
     {
-      value: userDataScore.todayScore * 100 || userDataScore.score * 100,
+      value:
+        userDataScore.data?.todayScore * 100 || userDataScore.data?.score * 100,
     },
     {
-      value: 100 - userDataScore.todayScore * 100 || userDataScore.score * 100,
+      value:
+        100 - userDataScore.data?.todayScore * 100 ||
+        userDataScore.data?.score * 100,
     },
   ];
   console.log("score:", score);
