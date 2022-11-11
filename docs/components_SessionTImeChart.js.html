@@ -38,46 +38,33 @@ import {
 } from "recharts";
 import useFetchUrl from "../hooks/useFetch";
 import { useParams } from "react-router-dom";
+import { BackendURLs } from "../constantes";
+import { Rectangle } from "recharts";
 import PropTypes from "prop-types";
+import { numberToLetter } from "../utils/Formatted";
+// import {numberToLetter} from "../utils/Formatted"
 function SessionTimeChart() {
-  const params = useParams();
-
-  // /** fetch the data including the time of an average session of the user
-  //  * @type {{userId: number,sessions:[{day:number|"string",sessionLength: number}]}}
-  //  * @return a promesse
-  //  */
-  const sessionsAverage = useFetchUrl(
-    `/mock_data/user/${params.id}/average-sessions.json`
-  );
-  const average = sessionsAverage?.sessions;
-
-  //function to convert the day into a letter of the week
-  const daySession = average?.map((data) => {
-    switch (data.day) {
-      case 1:
-        return { ...data, day: "L" };
-      case 2:
-        return { ...data, day: "M" };
-      case 3:
-        return { ...data, day: "M" };
-      case 4:
-        return { ...data, day: "J" };
-      case 5:
-        return { ...data, day: "V" };
-      case 6:
-        return { ...data, day: "S" };
-      case 7:
-        return { ...data, day: "D" };
-      default:
-        return { ...data };
-    }
-  });
-  /**
-   * @prop {Boolean} active whether the component is active or not (mouse over)
-   * @prop {ArrayOfObject} payload Properties of each componant Bar
+  const userId = useParams();
+  /**  Render a LineChart with user session Data
+   * @return {JSX}
    */
 
-  const CustomTooltip = ({ active, payload }) => {
+  //getting the url the correct url depending the MODE:LIVE || MOCK
+  const getUrl = BackendURLs.GetUsersAverageSession[process.env.REACT_APP_MODE];
+  console.log("getUrl:", getUrl);
+  //fetching the average session data of the user according to the userId
+  const sessionsAverage = useFetchUrl(getUrl(userId.id));
+
+  const average = sessionsAverage?.data?.sessions;
+
+  //function to convert the day into a letter of the week
+  const daySession = numberToLetter(average);
+
+  /**
+   * @prop {Boolean} active is the component is active or not? (mouse over)
+   * @prop {ArrayOfObject} payload Properties of each componant Bar
+   */
+  const CustomTooltipTime = ({ active, payload }) => {
     if (active) {
       return (
         &lt;div className="custom-tooltip-time">
@@ -88,44 +75,73 @@ function SessionTimeChart() {
 
     return null;
   };
-  return (
-    &lt;div className="sessionTime-activity">
-      &lt;h1 className="activity">Durée moyenne des sessions&lt;/h1>
-      &lt;ResponsiveContainer width="100%" height="100%">
-        &lt;LineChart data={daySession}>
-          &lt;CartesianGrid horizontal="" vertical="" />
-          &lt;XAxis
-            type="category"
-            dataKey="day"
-            tickLine={true}
-            stroke=""
-            padding={{ right: 5, left: 5 }}
-            tick={{ fontSize: 13, stroke: "white", opacity: 0.8 }}
-          />
-          &lt;YAxis
-            dataKey="sessionLength"
-            domain={[0, "dataMax + 30"]}
-            hide={true}
-          />
-          &lt;Tooltip
-            content={&lt;CustomTooltip />}
-            // wrapperStyle={{ outline: none }}
-            // wrapperStyle={none}
-          />
-          &lt;Line
-            type="monotone"
-            dataKey="sessionLength"
-            stroke="rgba(255, 255, 255, 0.7)"
-            strokeWidth={2}
-            dot={false}
-            activeDot={{ stroke: "white", r: 4, strokeWidth: 2 }}
-          />
-        &lt;/LineChart>
-      &lt;/ResponsiveContainer>
-    &lt;/div>
-  );
+  /**
+   * @prop {number} width
+   * @prop {number} point
+   */
+  const CustomCursor = (props) => {
+    const { width, points } = props;
+    const X = points[0].x;
+    const Y = points[0].y;
+    const sum = width - X;
+    return (
+      &lt;Rectangle
+        width={sum}
+        height={263}
+        x={X}
+        y={Y}
+        style={{ background: "red", opacity: 0.1 }}
+      />
+    );
+  };
+  if (average?.length > 0) {
+    return (
+      &lt;div className="sessionTime-activity">
+        &lt;h1 className="activity">Durée moyenne des sessions&lt;/h1>
+        &lt;ResponsiveContainer width="100%" height="100%">
+          &lt;LineChart data={daySession}>
+            &lt;CartesianGrid horizontal="" vertical="" />
+            &lt;XAxis
+              type="category"
+              dataKey="day"
+              tickLine={true}
+              stroke=""
+              padding={{ right: 5, left: 5 }}
+              tick={{ fontSize: 13, stroke: "white", opacity: 0.8 }}
+            />
+            &lt;YAxis
+              dataKey="sessionLength"
+              domain={[0, "dataMax + 30"]}
+              hide={true}
+            />
+            &lt;Tooltip
+              content={&lt;CustomTooltipTime />}
+              wrapperStyle={{ outline: "none" }}
+              cursor={&lt;CustomCursor />}
+            />
+            &lt;Line
+              type="monotone"
+              dataKey="sessionLength"
+              stroke="rgba(255, 255, 255, 0.7)"
+              strokeWidth={2}
+              dot={false}
+              activeDot={{ stroke: "white", r: 4, strokeWidth: 2 }}
+            />
+          &lt;/LineChart>
+        &lt;/ResponsiveContainer>
+      &lt;/div>
+    );
+  }
 }
-
+SessionTimeChart.propTypes = {
+  userId: PropTypes.number,
+  sessions: PropTypes.shape([
+    {
+      day: PropTypes.number,
+      sessionLength: PropTypes.number,
+    },
+  ]),
+};
 export default SessionTimeChart;
 </code></pre>
         </article>
@@ -137,13 +153,13 @@ export default SessionTimeChart;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#useFetchUrl">useFetchUrl</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#dayToNumber">dayToNumber</a></li><li><a href="global.html#enToFr">enToFr</a></li><li><a href="global.html#formatettedScore">formatettedScore</a></li><li><a href="global.html#NavBar">NavBar</a></li><li><a href="global.html#NavBarFakelogin">NavBarFakelogin</a></li><li><a href="global.html#numberToLetter">numberToLetter</a></li><li><a href="global.html#PieChartActivity">PieChartActivity</a></li><li><a href="global.html#RadarPerformance">RadarPerformance</a></li><li><a href="global.html#useFetchUrl">useFetchUrl</a></li><li><a href="global.html#UserCard">UserCard</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Tue Oct 11 2022 16:55:18 GMT+0200 (heure d’été d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Fri Nov 11 2022 21:40:21 GMT+0100 (heure normale d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

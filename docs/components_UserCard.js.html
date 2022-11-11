@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: hooks/useFetch.js</title>
+    <title>JSDoc: Source: components/UserCard.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: hooks/useFetch.js</h1>
+    <h1 class="page-title">Source: components/UserCard.js</h1>
 
     
 
@@ -26,35 +26,49 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// import axios from "axios";
-import { useState, useEffect } from "react";
+            <pre class="prettyprint source linenums"><code>import { useNavigate } from "react-router-dom";
+import maleAvatar from "../assets/avatarHomme.jpg";
+import femaleAvatar from "../assets/avatarFemme.jpg";
 /**
- * function to fetch data from the Mock file OR the Api
- * @param {string} path URL to fetch the data
- * @returns Promesse
+ *
+ * @prop {object} dataUsers object with the information about the name and age of the users
+ * @returns {JSX}
  */
-function useFetchUrl(path) {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    fetch(path, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setData(data);
-      })
-      .catch((err) => {
-        console.log("Error Reading data " + err);
-      });
-  }, [path]);
-  return data;
+function UserCard(props) {
+  const { dataUsers } = props;
+  let navigate = useNavigate();
+
+  return (
+    &lt;>
+      {dataUsers.map((user, index) => (
+        &lt;div className="block" key={index}>
+          &lt;div
+            className="userCard"
+            onClick={() => {
+              navigate(`/user/${user.id}`);
+            }}
+          >
+            &lt;div className="avatar">
+              &lt;img
+                src={user.id === 12 ? maleAvatar : femaleAvatar}
+                className="userAvatar"
+                alt=""
+              />
+            &lt;/div>
+            &lt;div className="username-info">
+              &lt;p className="name">
+                {user.userInfos.firstName} {user.userInfos.lastName}
+              &lt;/p>
+              &lt;p className="Age">{user.userInfos.age} ans&lt;/p>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+      ))}
+    &lt;/>
+  );
 }
 
-export default useFetchUrl;
+export default UserCard;
 </code></pre>
         </article>
     </section>

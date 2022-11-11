@@ -11,48 +11,31 @@ import {
 import useFetchUrl from "../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import { BackendURLs } from "../constantes";
+import { Rectangle } from "recharts";
 import PropTypes from "prop-types";
+import { numberToLetter } from "../utils/Formatted";
+// import {numberToLetter} from "../utils/Formatted"
 function SessionTimeChart() {
   const userId = useParams();
-
-  /** fetch the data including the time of an average session of the user
-   * @type {{userId: number,sessions:[{day:number|"string",sessionLength: number}]}}
-   * @returns {Promise}
+  /**  Render a LineChart with user session Data
+   * @return {JSX}
    */
+
+  //getting the url the correct url depending the MODE:LIVE || MOCK
   const getUrl = BackendURLs.GetUsersAverageSession[process.env.REACT_APP_MODE];
   console.log("getUrl:", getUrl);
+  //fetching the average session data of the user according to the userId
   const sessionsAverage = useFetchUrl(getUrl(userId.id));
-  // const sessionsAverage = useFetchUrl(
-  //   `/user/${params.id}/average-sessions.json`
-  // );
+
   const average = sessionsAverage?.data?.sessions;
 
   //function to convert the day into a letter of the week
-  const daySession = average?.map((data) => {
-    switch (data.day) {
-      case 1:
-        return { ...data, day: "L" };
-      case 2:
-        return { ...data, day: "M" };
-      case 3:
-        return { ...data, day: "M" };
-      case 4:
-        return { ...data, day: "J" };
-      case 5:
-        return { ...data, day: "V" };
-      case 6:
-        return { ...data, day: "S" };
-      case 7:
-        return { ...data, day: "D" };
-      default:
-        return { ...data };
-    }
-  });
+  const daySession = numberToLetter(average);
+
   /**
-   * @prop {Boolean} active whether the component is active or not (mouse over)
+   * @prop {Boolean} active is the component is active or not? (mouse over)
    * @prop {ArrayOfObject} payload Properties of each componant Bar
    */
-
   const CustomTooltipTime = ({ active, payload }) => {
     if (active) {
       return (
@@ -64,7 +47,26 @@ function SessionTimeChart() {
 
     return null;
   };
-  if (daySession?.length > 0) {
+  /**
+   * @prop {number} width
+   * @prop {number} point
+   */
+  const CustomCursor = (props) => {
+    const { width, points } = props;
+    const X = points[0].x;
+    const Y = points[0].y;
+    const sum = width - X;
+    return (
+      <Rectangle
+        width={sum}
+        height={263}
+        x={X}
+        y={Y}
+        style={{ background: "red", opacity: 0.1 }}
+      />
+    );
+  };
+  if (average?.length > 0) {
     return (
       <div className="sessionTime-activity">
         <h1 className="activity">Durée moyenne des sessions</h1>
@@ -87,6 +89,7 @@ function SessionTimeChart() {
             <Tooltip
               content={<CustomTooltipTime />}
               wrapperStyle={{ outline: "none" }}
+              cursor={<CustomCursor />}
             />
             <Line
               type="monotone"

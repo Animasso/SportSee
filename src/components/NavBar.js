@@ -1,5 +1,9 @@
 import logo from "../assets/logoSport.png";
-function NavBar(props) {
+/**
+ * Navigaton bar
+ * @returns {JSX}
+ */
+function NavBar() {
   return (
     <>
       <nav className="simpleNav">

@@ -1,3 +1,4 @@
+// url to get each charts datas depending of the value of the REACT_APP_MODE in the .env file
 export const BackendURLs = {
   GetUsersActivity: {
     LIVE: (userId) => `http://localhost:3000/user/${userId}/activity`,

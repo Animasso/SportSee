@@ -11,29 +11,24 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { BackendURLs } from "../constantes";
+import { dayToNumber } from "../utils/Formatted";
 function BarChartActivity() {
+  /**
+   * Render a BarChart with user activity Data
+   * @return {JSX}
+   */
   //get the userId
   const userId = useParams();
-
-  /** fetch the data including the activity of the user
-   * @type {{userId: number,sessions:{Array.<{day:number|string, kilogram:number,calories:number}>}}}
-   *@returns {Promise}
-   */
-  // const userActivity = useFetchUrl(`/user/${params.id}/activity.json`);
-  // const userActivity = useFetchUrl(`/user/${params.id}/activity.json`);
-
+  //getting the url the correct url depending the MODE:LIVE || MOCK
   const getUrl = BackendURLs.GetUsersActivity[process.env.REACT_APP_MODE];
   console.log("getUrl:", getUrl);
+  //fetching activity data of the user according to the userId
   const userActivity = useFetchUrl(getUrl(userId.id));
-  console.log("userActivity:", userActivity);
-  //faire une condition if else  avec le live et le mock
-  const actSession = userActivity?.data?.sessions;
-  console.log("actSession:", actSession);
 
-  //loop to convert days into one number from 1 to 7
-  for (let i = 0; i < actSession?.length; i++) {
-    actSession[i].day = i + 1;
-  }
+  const actSession = userActivity?.data?.sessions;
+  // convert the date into a number that matching a day
+  const actSessionFormatted = dayToNumber(actSession);
+
   /**
    * @prop {Boolean} active whether the component is active or not (mouse over)
    * @prop {ArrayOfObject} payload Properties of each componant Bar
@@ -70,11 +65,9 @@ function BarChartActivity() {
         </header>
         <ResponsiveContainer height={200}>
           <BarChart
-            // width={500}
-
             barGap={8}
             barCategoryGap={1}
-            data={actSession}
+            data={actSessionFormatted}
             margin={{
               top: 5,
               right: 30,

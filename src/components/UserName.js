@@ -5,11 +5,9 @@ import iconCarbs from "../assets/carbs-icon.png";
 import iconFat from "../assets/fat-icon.png";
 import iconProtein from "../assets/protein-icon.png";
 
-function UserName(props) {
-  //   const { dataUsers } = props;
+function UserName() {
   const params = useParams();
   const userDataInfo = useFetchUrl(`/user/${params.id}/data.json`);
-  console.log("userDataInfo:", userDataInfo);
 
   return (
     <>

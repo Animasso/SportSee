@@ -13,11 +13,7 @@ import { BackendURLs } from "./constantes";
 function App() {
   const getUrl = BackendURLs.GetUsersData;
   console.log("getUrl:", getUrl);
-
-  // const dataUsers = useFetchUrl(getUrl());
   const dataUsers = useFetchUrl("user/user_data.json");
-  // console.log("dataUsers:", dataUsers);
-  // const params = useParams();
 
   return (
     <div>

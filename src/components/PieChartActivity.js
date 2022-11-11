@@ -4,75 +4,64 @@ import useFetchUrl from "../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { BackendURLs } from "../constantes";
+import { formatettedScore } from "../utils/Formatted";
 
 /**
- * 
- *  
-   
+ * create a PieChart with score value
  * @returns {React.ReactElement}
  */
-
-function PieChartActivity(props) {
+function PieChartActivity() {
   const userId = useParams();
+  //getting the url the correct url depending the MODE:LIVE || MOCK
   const getUrl = BackendURLs.GetUserData[process.env.REACT_APP_MODE];
   console.log("getUrl:", getUrl);
   const userDataScore = useFetchUrl(getUrl(userId.id));
   console.log("userDataScore:", userDataScore);
-  // const userDataScore = useFetchUrl(`/user/${userId.id}/data.json`);
 
-  // convert the todayScore or score into a pourcentaage
-  const score = [
-    {
-      value:
-        userDataScore.data?.todayScore * 100 || userDataScore.data?.score * 100,
-    },
-    {
-      value:
-        100 - userDataScore.data?.todayScore * 100 ||
-        userDataScore.data?.score * 100,
-    },
-  ];
+  const userScore =
+    userDataScore?.data?.score || userDataScore?.data?.todayScore;
+  console.log("userScore:", userScore);
+
+  // the todayScore or score into a pourcentaage
+  const score = formatettedScore(userScore);
   console.log("score:", score);
 
-  // console.log("userDataScore:", userDataScore);
-  if (score?.length > 0) {
-    return (
-      <div className="pie-activity">
-        {
-          <>
-            <ResponsiveContainer>
-              <PieChart>
-                <Pie
-                  data={score}
-                  dataKey="value"
-                  innerRadius={70}
-                  outerRadius={80}
-                  startAngle={90}
-                >
-                  {score.map((entry, index) =>
-                    index === 0 ? (
-                      <Cell
-                        key={`cell-${index}`}
-                        cornerRadius={10}
-                        fill="#ff0000"
-                      />
-                    ) : (
-                      <Cell key={`cell-${entry}`} fill="#FBFBFB" />
-                    )
-                  )}
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
-            <div className="score">
-              <span className="num-score">{score[0].value}%</span> <br />
-              de votre
-              <br /> objectif
-            </div>
-          </>
-        }
-      </div>
-    );
-  }
+  return (
+    <div className="pie-activity">
+      {
+        <>
+          <ResponsiveContainer>
+            <PieChart>
+              <Pie
+                data={score}
+                dataKey="value"
+                innerRadius={70}
+                outerRadius={80}
+                startAngle={90}
+              >
+                {score.map((entry, index) =>
+                  index === 0 ? (
+                    <Cell
+                      key={`cell-${index}`}
+                      cornerRadius={10}
+                      fill="#ff0000"
+                    />
+                  ) : (
+                    <Cell key={`cell-${entry}`} fill="#FBFBFB" />
+                  )
+                )}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="score">
+            <span className="num-score">{score[0].value}%</span> <br />
+            de votre
+            <br /> objectif
+          </div>
+        </>
+      }
+    </div>
+  );
 }
 PieChartActivity.propTypes = {
   userId: PropTypes.number,

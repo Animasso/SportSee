@@ -32,33 +32,31 @@ import PropTypes from "prop-types";
 import {
   BarChart,
   Bar,
-  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
-
+import { BackendURLs } from "../constantes";
+import { dayToNumber } from "../utils/Formatted";
 function BarChartActivity() {
-  //get the userId
-  const params = useParams();
-
-  /** fetch the data including the activity of the user
-   * @type {{userId: number,sessions:{Array.&lt;{day:string, kilogram:number,calories:number}>}}}
-   * @return Promesse
+  /**
+   * Render a BarChart with user activity Data
+   * @return {JSX}
    */
-  const userActivity = useFetchUrl(
-    `/mock_data/user/${params.id}/activity.json`
-  );
+  //get the userId
+  const userId = useParams();
+  //getting the url the correct url depending the MODE:LIVE || MOCK
+  const getUrl = BackendURLs.GetUsersActivity[process.env.REACT_APP_MODE];
+  console.log("getUrl:", getUrl);
+  //fetching activity data of the user according to the userId
+  const userActivity = useFetchUrl(getUrl(userId.id));
 
-  const actSession = userActivity?.sessions;
+  const actSession = userActivity?.data?.sessions;
+  // convert the date into a number that matching a day
+  const actSessionFormatted = dayToNumber(actSession);
 
-  //loop to convert days into one number from 1 to 7
-  for (let i = 0; i &lt; actSession?.length; i++) {
-    actSession[i].day = i + 1;
-  }
   /**
    * @prop {Boolean} active whether the component is active or not (mouse over)
    * @prop {ArrayOfObject} payload Properties of each componant Bar
@@ -76,94 +74,99 @@ function BarChartActivity() {
 
     return null;
   };
+  if (actSession?.length > 0) {
+    return (
+      &lt;div className="barChart-activity">
+        &lt;header>
+          &lt;div className="daily-activity">Activité quotidienne&lt;/div>
+          &lt;div className="round">
+            &lt;div className=" color">
+              &lt;div className="blackr">&lt;/div>
+              &lt;p>Poids (kg)&lt;/p>
+            &lt;/div>
 
-  return (
-    &lt;div className="barChart-activity">
-      &lt;header>
-        &lt;div className="daily-activity">Activité quotidienne&lt;/div>
-        &lt;div className="round">
-          &lt;div className=" color">
-            &lt;div className="blackr">&lt;/div>
-            &lt;p>Poids (kg)&lt;/p>
+            &lt;div className=" colorRR">
+              &lt;div className="redr">&lt;/div>
+              &lt;p>Calories brûlées (kCal)&lt;/p>
+            &lt;/div>
           &lt;/div>
+        &lt;/header>
+        &lt;ResponsiveContainer height={200}>
+          &lt;BarChart
+            barGap={8}
+            barCategoryGap={1}
+            data={actSessionFormatted}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            &lt;CartesianGrid strokeDasharray="3 3" />
+            &lt;XAxis
+              dataKey="day"
+              tickLine={false}
+              tick={{ fontSize: 14 }}
+              dy={15}
+              stroke="1 1"
+            />
+            &lt;YAxis
+              yAxisId="kilogram"
+              dataKey="kilogram"
+              type="number"
+              domain={["dataMin - 2", "dataMax + 1"]}
+              tickCount="4"
+              axisLine={false}
+              orientation="right"
+              tickLine={false}
+              tick={{ fontSize: 14 }}
+              dx={15}
+            />
+            &lt;YAxis
+              yAxisId="calories"
+              dataKey="calories"
+              type="number"
+              domain={["dataMin - 20", "dataMax + 10"]}
+              hide={true}
+            />
 
-          &lt;div className=" colorRR">
-            &lt;div className="redr">&lt;/div>
-            &lt;p>Calories brûlées (kCal)&lt;/p>
-          &lt;/div>
-        &lt;/div>
-      &lt;/header>
-      &lt;ResponsiveContainer width="100%" height="100%">
-        &lt;BarChart
-          // width={500}
-          // height={300}
-          barGap={8}
-          barCategoryGap={1}
-          data={actSession}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          &lt;CartesianGrid strokeDasharray="3 3" />
-          &lt;XAxis
-            dataKey="day"
-            tickLine={false}
-            tick={{ fontSize: 14 }}
-            dy={15}
-            stroke="1 1"
-          />
-          &lt;YAxis
-            yAxisId="kilogram"
-            dataKey="kilogram"
-            type="number"
-            domain={["dataMin - 2", "dataMax + 1"]}
-            tickCount="4"
-            axisLine={false}
-            orientation="right"
-            tickLine={false}
-            tick={{ fontSize: 14 }}
-            dx={15}
-          />
-          &lt;YAxis
-            yAxisId="calories"
-            dataKey="calories"
-            type="number"
-            domain={["dataMin - 20", "dataMax + 10"]}
-            hide={true}
-          />
+            &lt;Tooltip
+              viewBox={{ x: 0, y: 0, width: 39, height: 25 }}
+              content={&lt;CustomTooltip />}
+              wrapperStyle={{ outline: "none" }}
+            />
 
-          &lt;Tooltip
-            viewBox={{ x: 0, y: 0, width: 39, height: 25 }}
-            content={&lt;CustomTooltip />}
-          />
-
-          &lt;Bar
-            yAxisId="kilogram"
-            dataKey="kilogram"
-            barSize={8}
-            radius={[5, 5, 0, 0]}
-            fill="black"
-          />
-          &lt;Bar
-            yAxisId="calories"
-            dataKey="calories"
-            barSize={8}
-            radius={[5, 5, 0, 0]}
-            fill="red"
-          />
-        &lt;/BarChart>
-      &lt;/ResponsiveContainer>
-    &lt;/div>
-  );
+            &lt;Bar
+              yAxisId="kilogram"
+              dataKey="kilogram"
+              barSize={8}
+              radius={[5, 5, 0, 0]}
+              fill="black"
+            />
+            &lt;Bar
+              yAxisId="calories"
+              dataKey="calories"
+              barSize={8}
+              radius={[5, 5, 0, 0]}
+              fill="red"
+            />
+          &lt;/BarChart>
+        &lt;/ResponsiveContainer>
+      &lt;/div>
+    );
+  }
 }
+
 BarChartActivity.propTypes = {
   userId: PropTypes.number,
-  day: PropTypes.string,
-  kilogram: PropTypes.number,
-  calories: PropTypes.number,
+  sessions: PropTypes.arrayOf(
+    PropTypes.shape({
+      day: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      kilogram: PropTypes.number,
+      calories: PropTypes.number,
+    })
+  ),
 };
 export default BarChartActivity;
 </code></pre>
@@ -176,13 +179,13 @@ export default BarChartActivity;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#useFetchUrl">useFetchUrl</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#dayToNumber">dayToNumber</a></li><li><a href="global.html#enToFr">enToFr</a></li><li><a href="global.html#formatettedScore">formatettedScore</a></li><li><a href="global.html#NavBar">NavBar</a></li><li><a href="global.html#NavBarFakelogin">NavBarFakelogin</a></li><li><a href="global.html#numberToLetter">numberToLetter</a></li><li><a href="global.html#PieChartActivity">PieChartActivity</a></li><li><a href="global.html#RadarPerformance">RadarPerformance</a></li><li><a href="global.html#useFetchUrl">useFetchUrl</a></li><li><a href="global.html#UserCard">UserCard</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Tue Oct 11 2022 16:55:18 GMT+0200 (heure d’été d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Fri Nov 11 2022 21:40:21 GMT+0100 (heure normale d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

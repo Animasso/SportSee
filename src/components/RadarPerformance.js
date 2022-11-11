@@ -12,55 +12,24 @@ import {
 import useFetchUrl from "../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import { enToFr } from "../utils/Formatted";
 import { BackendURLs } from "../constantes";
 /**
- * It's a function that  returns a bar chart
- * @returns {React.ReactElement}
+ * Create a bar chart with the performance data
+ * @returns {JSX}
  */
 function RadarPerformance() {
   const userId = useParams();
-  console.log("userId:", userId);
-  console.log(userId.id);
-
-  //retrive the correct url depending the MODE:LIVE || MOCK
+  //getting the url the correct url depending the MODE:LIVE || MOCK
   const getUrl = BackendURLs.GetUsersPerformance[process.env.REACT_APP_MODE];
   console.log("getUrl:", getUrl);
-
+  //fetching the performance data of the user according to the userId
   const userPerformance = useFetchUrl(getUrl(userId.id));
-  console.log("userPerformance:", userPerformance);
-  // const userPerformance = useFetchUrl(`/user/${userId.id}/performance.json`);
+
   const userData = userPerformance?.data?.data;
   console.log("userData:", userData);
 
-  const kind = userPerformance?.kind;
-  console.log("kind:", kind);
-
-  /**
-   *
-   * @param {string} str
-   * @returns translation from english to french
-   */
-  function enToFr(str) {
-    switch (str) {
-      case "energy":
-        return "Energie";
-      case "strength":
-        return "Force";
-      case "speed":
-        return "Vitesse";
-      case "intensity":
-        return "Intensité";
-      case "cardio":
-        return "Cardio";
-      case "endurance":
-        return "Endurance";
-      default:
-        return;
-    }
-  }
-  /**
-   * @return {{id:number, data: string}} all the data proprely tranform
-   */
+  // convert the kind value of the data into french
   const performance = userData?.map((data) => ({
     ...data,
     kind: enToFr(userPerformance?.data?.kind[data.kind]),
@@ -78,7 +47,8 @@ function RadarPerformance() {
                 outerRadius="65%"
                 data={performance}
               >
-                <PolarGrid />
+                <PolarGrid radialLines={false} />
+
                 <PolarAngleAxis
                   dataKey="kind"
                   stroke="white"

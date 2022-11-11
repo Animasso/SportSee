@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: hooks/useFetch.js</title>
+    <title>JSDoc: Source: components/NavBar.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: hooks/useFetch.js</h1>
+    <h1 class="page-title">Source: components/NavBar.js</h1>
 
     
 
@@ -26,35 +26,30 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// import axios from "axios";
-import { useState, useEffect } from "react";
+            <pre class="prettyprint source linenums"><code>import logo from "../assets/logoSport.png";
 /**
- * function to fetch data from the Mock file OR the Api
- * @param {string} path URL to fetch the data
- * @returns Promesse
+ * Navigaton bar
+ * @returns {JSX}
  */
-function useFetchUrl(path) {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    fetch(path, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setData(data);
-      })
-      .catch((err) => {
-        console.log("Error Reading data " + err);
-      });
-  }, [path]);
-  return data;
+function NavBar() {
+  return (
+    &lt;>
+      &lt;nav className="simpleNav">
+        &lt;div className="logo">
+          &lt;img className="logo" src={logo} alt="logo" />
+        &lt;/div>
+        &lt;ul className="navbar">
+          &lt;li>Accueil&lt;/li>
+          &lt;li>Profil&lt;/li>
+          &lt;li>Réglage&lt;/li>
+          &lt;li>Communauté&lt;/li>
+        &lt;/ul>
+      &lt;/nav>
+    &lt;/>
+  );
 }
 
-export default useFetchUrl;
+export default NavBar;
 </code></pre>
         </article>
     </section>

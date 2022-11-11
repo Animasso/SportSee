@@ -3,8 +3,8 @@ import maleAvatar from "../assets/avatarHomme.jpg";
 import femaleAvatar from "../assets/avatarFemme.jpg";
 /**
  *
- * @param {*} props
- * @returns
+ * @prop {object} dataUsers object with the information about the name and age of the users
+ * @returns {JSX}
  */
 function UserCard(props) {
   const { dataUsers } = props;

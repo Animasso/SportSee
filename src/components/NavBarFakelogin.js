@@ -1,5 +1,8 @@
 import logo from "../assets/logoSport.png";
-
+/**
+ * Navigaton bar
+ * @returns {JSX}
+ */
 function NavBarFakelogin(props) {
   return (
     <>
