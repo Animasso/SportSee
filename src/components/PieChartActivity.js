@@ -47,7 +47,7 @@ function PieChartActivity() {
                       fill="#ff0000"
                     />
                   ) : (
-                    <Cell key={`cell-${entry}`} fill="#FBFBFB" />
+                    <Cell key={`cell-${entry}`} fill="#FFFFFF" />
                   )
                 )}
               </Pie>
