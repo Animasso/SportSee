@@ -68,10 +68,10 @@ export function numberToLetter(average) {
 export function formatettedScore(score) {
   return [
     {
-      value: score * 100 || score * 100,
+      value: score * 100,
     },
     {
-      value: 100 - score * 100 || score * 100,
+      value: 100 - score * 100,
     },
   ];
 }

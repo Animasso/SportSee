@@ -48,7 +48,6 @@ function RadarPerformance() {
                 data={performance}
               >
                 <PolarGrid radialLines={false} />
-
                 <PolarAngleAxis
                   dataKey="kind"
                   stroke="white"

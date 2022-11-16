@@ -33,6 +33,7 @@ function SessionTimeChart() {
   const daySession = numberToLetter(average);
 
   /**
+   * Customisation of the tooltip
    * @prop {Boolean} active is the component is active or not? (mouse over)
    * @prop {ArrayOfObject} payload Properties of each componant Bar
    */
@@ -48,8 +49,9 @@ function SessionTimeChart() {
     return null;
   };
   /**
+   * Changing color with the position of the cursor
    * @prop {number} width
-   * @prop {number} point
+   * @prop {number} points
    */
   const CustomCursor = (props) => {
     const { width, points } = props;

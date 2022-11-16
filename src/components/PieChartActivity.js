@@ -24,7 +24,7 @@ function PieChartActivity() {
 
   // the todayScore or score into a pourcentaage
   const score = formatettedScore(userScore);
-  console.log("score:", score);
+  // console.log("score:", score);
 
   return (
     <div className="pie-activity">
@@ -38,6 +38,7 @@ function PieChartActivity() {
                 innerRadius={70}
                 outerRadius={80}
                 startAngle={90}
+                endAngle={450}
               >
                 {score.map((entry, index) =>
                   index === 0 ? (
@@ -47,7 +48,7 @@ function PieChartActivity() {
                       fill="#ff0000"
                     />
                   ) : (
-                    <Cell key={`cell-${entry}`} fill="#FFFFFF" />
+                    <Cell key={`cell-${index}`} fill="#FFFFFF" />
                   )
                 )}
               </Pie>
