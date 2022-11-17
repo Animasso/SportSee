@@ -66,20 +66,19 @@ function BarChartActivity() {
         <ResponsiveContainer height={200}>
           <BarChart
             barGap={8}
-            barCategoryGap={1}
             data={actSessionFormatted}
             margin={{
-              top: 5,
+              top: 0,
               right: 30,
               left: 20,
               bottom: 5,
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid vertical={false} strokeDasharray="1 1" />
             <XAxis
               dataKey="day"
               tickLine={false}
-              tick={{ fontSize: 14 }}
+              tick={{ fontSize: 13 }}
               dy={15}
               stroke="1 1"
             />
@@ -88,11 +87,11 @@ function BarChartActivity() {
               dataKey="kilogram"
               type="number"
               domain={["dataMin - 2", "dataMax + 1"]}
-              tickCount="4"
+              tickCount="3"
               axisLine={false}
               orientation="right"
               tickLine={false}
-              tick={{ fontSize: 14 }}
+              tick={{ fontSize: 13 }}
               dx={15}
             />
             <YAxis

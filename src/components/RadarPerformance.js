@@ -27,14 +27,13 @@ function RadarPerformance() {
   const userPerformance = useFetchUrl(getUrl(userId.id));
 
   const userData = userPerformance?.data?.data;
-  console.log("userData:", userData);
 
   // convert the kind value of the data into french
   const performance = userData?.map((data) => ({
     ...data,
     kind: enToFr(userPerformance?.data?.kind[data.kind]),
   }));
-  console.log("performance:", performance);
+
   if (performance?.length > 0) {
     return (
       <div className="sessionTime-performance">
@@ -44,7 +43,7 @@ function RadarPerformance() {
               <RadarChart
                 cx="50%"
                 cy="50%"
-                outerRadius="65%"
+                outerRadius="60%"
                 data={performance}
               >
                 <PolarGrid radialLines={false} />
@@ -56,7 +55,7 @@ function RadarPerformance() {
                   label={false}
                   fontSize={9}
                 />
-                <PolarRadiusAxis axisLine={false} tick={false} label={false} />
+                <PolarRadiusAxis axisLine={false} tick={false} />
                 <Radar
                   dataKey="value"
                   stroke="red"

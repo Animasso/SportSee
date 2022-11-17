@@ -16,21 +16,17 @@ function PieChartActivity() {
   const getUrl = BackendURLs.GetUserData[process.env.REACT_APP_MODE];
   console.log("getUrl:", getUrl);
   const userDataScore = useFetchUrl(getUrl(userId.id));
-  console.log("userDataScore:", userDataScore);
 
   const userScore =
     userDataScore?.data?.score || userDataScore?.data?.todayScore;
-  console.log("userScore:", userScore);
 
   // the todayScore or score into a pourcentaage
   const score = formatettedScore(userScore);
-  // console.log("score:", score);
-
   return (
     <div className="pie-activity">
       {
         <>
-          <ResponsiveContainer>
+          <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={score}

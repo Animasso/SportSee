@@ -76,9 +76,7 @@ function SessionTimeChart() {
           <LineChart data={daySession}>
             <CartesianGrid horizontal="" vertical="" />
             <XAxis
-              type="category"
               dataKey="day"
-              tickLine={true}
               stroke=""
               padding={{ right: 5, left: 5 }}
               tick={{ fontSize: 13, stroke: "white", opacity: 0.8 }}
